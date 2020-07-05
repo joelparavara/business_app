@@ -1,32 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:koorkabusiness/menuDashboard.dart';
+import 'dart:convert';
 
-void main() {
-  runApp(MyApp());
-}
+import 'package:flutter/material.dart';
+import 'package:koorkabusiness/adminPage.dart';
+import 'package:koorkabusiness/clientPage.dart';
+import 'package:koorkabusiness/login_page.dart';
+import 'package:koorkabusiness/memberPage.dart';
+
+void main()=> runApp(new MyApp());
+
+String username='';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MenuDashboard()
-    );
-  }
+      title: 'Koorka',
+      home: new LoginPage(),
+      routes: <String, WidgetBuilder>{
+          '/AdminPage' : (BuildContext context)=> new AdminPage(),
+          '/ClientPage' : (BuildContext context)=> new ClientPage(username: username,),
+          '/LoginPage' : (BuildContext context)=> new LoginPage(),
+        },
+      );
+   }
 }
 
-/*
-  <?php
-     $host = 'localhost';
-     $user = 'u422904200_djenkoorka';
-     $pass = 'werekoorka';
-     $db = 'u422904200_koorkadb';
-
-     $conn = mysqli_connect($host,$user,$pass,$db);
-  ?>
- */
