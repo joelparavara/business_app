@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
+//bool load=false;
 class _LoginPageState extends State<LoginPage> {
 
   TextEditingController user=new TextEditingController();
@@ -19,6 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   String msg='';
 
   Future<List> _login() async {
+    setState(() {
+//      load=true;
+    });
     final response = await http.post("http://koorka.in/public/login.php", body: {
       "username": user.text,
       "password": pass.text,
@@ -29,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if(datauser.length==0){
       setState(() {
+//        load=false;
         msg="Login Fail";
       });
     } else {
@@ -37,8 +41,8 @@ class _LoginPageState extends State<LoginPage> {
       } else if (datauser["level"]=="admin"){
         Navigator.pushReplacementNamed(context, '/AdminPage');
       }
-
       setState(() {
+//        load=false;
         username = datauser["name"];
       });
     }
@@ -50,7 +54,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: Column(
+      body:
+//      (load)?Center(child: CircularProgressIndicator(),):
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
@@ -120,6 +126,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: GestureDetector(
                       onTap: (){
                         _login();
+                        setState(() {
+//                          load=false;
+                        });
                         print(pass.text);
                       },
                       child: Center(
