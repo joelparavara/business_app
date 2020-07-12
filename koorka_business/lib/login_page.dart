@@ -22,12 +22,12 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
 //      load=true;
     });
-    final response = await http.post("http://koorka.in/public/login.php", body: {
+    final response = await http.post("https://koorka.in/public/login.php", body: {
       "username": user.text,
       "password": pass.text,
     });
-
-    var datauser = json.decode(response.body);
+    print(response.body);
+      var datauser = json.decode(response.body);
     print(response.body);
 
     if(datauser.length==0){
